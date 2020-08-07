@@ -19,6 +19,10 @@
 
 <!--  securityUtility createSSLCertificate --password=1qaz2wsx  --validity=720 --server=defaultServer --subject=CN=tcb,O=iisi,C=Taiwan  -->
 <!-- in IHS,to excute  gskcmd.bat  -keydb -convert -pw 1qaz2wsx -db c:/vagrant/key.p12 -old_format p12  -target  c:/tmp/key.kdb  -new_format cms -stash  -->   
+<!-- keytool -exportcert -rfc  -keystore key.p12  -storepass 1qaz2wsx  -storetype PKCS12  -alias default -file singer1.arm -->
+<!-- gskcapicmd -keydb -create -genpw -stash -db plugin-key.kdb  -->
+<!-- gskcapicmd -cert -add -db plugin-key.kdb  -stashed -label liberty-n -file singer1.arm -->
+<!-- pluginUtility merge --targetPath=.. --sourcePath=c:/vagrant -->
    <keyStore id="defaultKeyStore"  type="PKCS12"  />
     <ssl id="defaultSSLConfig"
        keyStoreRef="defaultKeyStore"

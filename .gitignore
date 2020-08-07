@@ -1,5 +1,7 @@
 *.zip
 wlp-*
 *.exe
+*.7z
 agent*
 .vagrant/
+plugins
