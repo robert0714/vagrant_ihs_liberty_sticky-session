@@ -367,8 +367,8 @@ EnableSendfile off
 # logged here.  If you *do* define an error logfile for a <VirtualHost>
 # container, that host's errors will be logged there and not here.
 #
-# ErrorLog logs/error.log
-ErrorLog  "|bin/rotatelogs.exe  -l  logs/access.%Y.%m.%d.log  86400" 
+ErrorLog logs/error.log
+
 #
 # LogLevel: Control the number of messages logged to the error log.
 # Possible values include: debug, info, notice, warn, error, crit,
@@ -393,8 +393,8 @@ LogFormat "%{User-agent}i" agent
 # define per-<VirtualHost> access logfiles, transactions will be
 # logged therein and *not* in this file.
 #
-# CustomLog logs/access.log common
-CustomLog  "|bin/rotatelogs.exe  -l  logs/access.%Y.%m.%d.log  86400"  common
+CustomLog logs/access.log common
+
 #
 # If you would like to have agent and referer logfiles, uncomment the
 # following directives.
@@ -804,7 +804,10 @@ Listen 0.0.0.0:443
 #Listen [::]:443
 #SSLCheckCertificateExpiration 30
 <VirtualHost *:443>
+#  ServerName localhost
+#  ServerAlias localhost
   SSLEnable
+  SSLServerCert localhost
   SSLCipherSpec  ALL  NONE
   SSLCipherSpec  TLSv12  TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256
   SSLCipherSpec  TLSv12  TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
@@ -814,11 +817,11 @@ Listen 0.0.0.0:443
   SSLCipherSpec  ALL  TLS_RSA_WITH_AES_256_GCM_SHA384
   SSLCipherSpec  ALL  TLS_RSA_WITH_AES_128_CBC_SHA256
   SSLCipherSpec  ALL  TLS_RSA_WITH_AES_256_CBC_SHA256 
-  ErrorLog  "|bin/rotatelogs.exe  -l  logs/ssl_error.%Y.%m.%d.log  86400"
-  CustomLog  "|bin/rotatelogs.exe  -l  logs/ssl_access.%Y.%m.%d.log  86400"  common  
   Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-  KeyFile "C:/Program Files/IBM/HTTPServer/ssl/key.kdb"
-  SSLStashFile "C:/Program Files/IBM/HTTPServer/ssl/key.sth" 
+  ErrorLog   "|bin/rotatelogs.exe  -l  logs/ssl_error.%Y.%m.%d.log  86400"
+  CustomLog  "|bin/rotatelogs.exe  -l  logs/ssl_access.%Y.%m.%d.log  86400"  common 
+  KeyFile "C:/Program Files/IBM/HTTPServer/conf/ihsserverkey.kdb"
+  SSLStashFile "C:/Program Files/IBM/HTTPServer/conf/ihsserverkey.sth"  
 </VirtualHost>
 
 
