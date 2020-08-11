@@ -24,7 +24,7 @@
 <!-- gskcapicmd -keydb -create -genpw -stash -db plugin-key.kdb  -->
 <!-- gskcapicmd -cert -add -db plugin-key.kdb  -stashed -label liberty-n -file singer1.arm -->
 <!-- pluginUtility merge --targetPath=.. --sourcePath=c:/vagrant -->
-   <keyStore id="defaultKeyStore"  type="PKCS12"  />
+<!--    <keyStore id="defaultKeyStore"  type="PKCS12"  />-->
     <ssl id="defaultSSLConfig"
        keyStoreRef="defaultKeyStore"
        trustStoreRef="defaultTrustStore"
