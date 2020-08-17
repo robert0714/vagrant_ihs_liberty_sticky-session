@@ -5,7 +5,7 @@
    <Property Name="ESIMaxCacheSize" Value="1024"/>
    <Property Name="ESIInvalidationMonitor" Value="false"/>
    <Property Name="ESIEnableToPassCookies" Value="false"/>
-   <Property Name="PluginInstallRoot" Value="C:/Program Files/IBM/WebSphere/Plugins"/>
+   <Property Name="PluginInstallRoot" Value="/opt/IBM/WebSphere/Plugins"/>
 <!-- Server Clusters --><ServerCluster CloneSeparatorChange="false" GetDWLMTable="false" IgnoreAffinityRequests="true" LoadBalance="Round Robin" Name="defaultServer_default_node_Cluster_0" PostBufferSize="0" PostSizeLimit="-1" RemoveSpecialHeaders="true" RetryInterval="60" ServerIOTimeoutRetry="-1">
       <Server CloneID="s0" ConnectTimeout="5" ExtendedHandshake="false" LoadBalanceWeight="20" MaxConnections="-1" Name="default_node_defaultServer" ServerIOTimeout="900" WaitForContinue="false">
          <Transport Hostname="192.168.57.13" Port="9080" Protocol="http"/>
