@@ -1,0 +1,64 @@
+<server description="new server">
+
+    <!-- Enable features -->
+    <featureManager>
+        <feature>jsp-2.3</feature>
+        <feature>localConnector-1.0</feature>
+        <feature>jdbc-4.2</feature>
+	<feature>adminCenter-1.0</feature>
+	<feature>jndi-1.0</feature>
+        <feature>transportSecurity-1.0</feature>
+        <feature>websocket-1.1</feature>
+        <feature>servlet-4.0</feature>
+        <feature>sessionCache-1.0</feature>
+   </featureManager>
+
+    <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
+    <httpEndpoint  host="*" httpPort="${httpPort}" httpsPort="${httpsPort}" id="defaultHttpEndpoint"/>
+                  
+    <!-- Automatically expand WAR files and EAR files -->
+    <applicationManager autoExpand="true"/>
+    
+	
+    <library id="mssql">
+        <file name="mssql-jdbc-8.3.0.jre8-preview.jar"/>
+    </library>
+
+    <jdbcDriver id="iadb_DD_MSSQLDriver"  javax.sql.DataSource="com.microsoft.sqlserver.jdbc.SQLServerDataSource"
+			javax.sql.ConnectionPoolDataSource="com.microsoft.sqlserver.jdbc.SQLServerConnectionPoolDataSource"  libraryRef="mssql"/>
+
+    <dataSource beginTranForResultSetScrollingAPIs="true" connectionManagerRef="ConnectionPool_IADB_MSSQLDataSource" id="DataSource_IADB_MSSQLDataSource" isolationLevel="TRANSACTION_READ_COMMITTED" jdbcDriverRef="iadb_DD_MSSQLDriver" jndiName="jdbc/eatmdb">
+           <!--		<properties.microsoft.sqlserver databaseName="eatm" password="p@ssw0rd" portNumber="1433" serverName="192.168.36.93" user="sa"/>  -->
+           <properties.microsoft.sqlserver databaseName="neatm" password="syscom#1" portNumber="1433" serverName="192.168.57.21" user="sa"/>
+ 	</dataSource>
+    <connectionManager agedTimeout="7200" connectionTimeout="180" id="ConnectionPool_IADB_MSSQLDataSource" maxPoolSize="100" minPoolSize="1" purgePolicy="FailingConnectionOnly"/>
+<!---->
+    <ssl id="defaultSSLConfig"
+       keyStoreRef="defaultKeyStore"
+       trustStoreRef="defaultTrustStore"
+       sslProtocol="TLSv1.2"
+       enabledCiphers="TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256 TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 TLS_RSA_WITH_AES_256_GCM_SHA384 TLS_RSA_WITH_AES_128_GCM_SHA256"    />
+
+
+    <applicationMonitor updateTrigger="mbean"/>
+
+    <basicRegistry>
+    	<user name="wasadmin" password="wasadmin"/>
+    </basicRegistry>
+    <administrator-role>
+    	<user>wasadmin</user>
+    </administrator-role>
+    <remoteFileAccess>
+        <writeDir>${server.config.dir}</writeDir>
+    </remoteFileAccess>
+
+    <httpSessionCache libraryRef="jCacheVendorLib"
+        uri="file:${server.config.dir}/hazelcast-config.xml" />
+    <library id="jCacheVendorLib">
+        <file name="hazelcast.jar" />
+    </library>
+    <httpSession cloneId="${cloneId}"/>
+
+<!--
+    <application  type="war" id="mgr-web" location="dropins/mgr-web.war" name="mgr-web" contexti-root="/mgr-web"/> -->
+</server>
