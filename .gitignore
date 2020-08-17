@@ -5,3 +5,4 @@ wlp-*
 agent*
 .vagrant/
 plugins
+*.war
