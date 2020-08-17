@@ -14,9 +14,17 @@
             <Property Name="stashfile" Value="/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.sth"/>
          </Transport>
       </Server>
+      <Server CloneID="s1" ConnectTimeout="5" ExtendedHandshake="false" LoadBalanceWeight="20" MaxConnections="-1" Name="default_node_defaultServer1" ServerIOTimeout="900" WaitForContinue="false">
+         <Transport Hostname="192.168.57.13" Port="9081" Protocol="http"/>
+         <Transport Hostname="192.168.57.13" Port="9444" Protocol="https">
+            <Property Name="keyring" Value="/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.kdb"/>
+            <Property Name="stashfile" Value="/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.sth"/>
+         </Transport>
+      </Server>
       
    <PrimaryServers>
             <Server Name="default_node_defaultServer"/>
+            <Server Name="default_node_defaultServer1"/>
         </PrimaryServers>
     </ServerCluster>
     <!-- Virtual Host Groups -->

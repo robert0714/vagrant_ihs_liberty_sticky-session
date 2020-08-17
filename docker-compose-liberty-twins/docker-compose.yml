@@ -42,7 +42,7 @@ services:
     - $PWD/dropins:/config/dropins
     - $PWD/../shared_libraries/mssql-jdbc-8.3.0.jre8-preview.jar:/config/mssql-jdbc-8.3.0.jre8-preview.jar
     - $PWD/key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12
-    - $PWD/../hazelcast-3.12.8.jar:/config/hazelcast.jar
+    - $PWD/../shared_libraries/hazelcast-3.12.8.jar:/config/hazelcast.jar
     - $PWD/../hazelcast-config.xml:/config/hazelcast-config.xml
     - $PWD/server.xml:/config/server.xml
     - $PWD/server.env:/config/server.env
