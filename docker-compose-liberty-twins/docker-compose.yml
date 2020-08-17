@@ -1,6 +1,19 @@
 version: '2'
 
 services:
+  ihs:
+    container_name: ihs
+    image: ibmcom/ibm-http-server:9.0.5.0
+    volumes:
+    - $PWD/httpd.conf:/opt/IBM/HTTPServer/conf/httpd.conf
+    - $PWD/../ssl/ihsserverkey.kdb:/opt/IBM/HTTPServer/conf/ihsserverkey.kdb
+    - $PWD/../ssl/ihsserverkey.sth:/opt/IBM/HTTPServer/conf/ihsserverkey.sth
+    - $PWD/plugin-cfg.xml:/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-cfg.xml
+    environment:
+    - TZ=Asia/Taipei
+    #network_mode:  "host"
+    ports:
+     - "80:80"
   liberty0:
     container_name: liberty0
     image: ibmcom/websphere-liberty:20.0.0.6-full-java8-ibmjava-ubi
@@ -8,7 +21,9 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     - $PWD/dropins:/config/dropins
     - $PWD/../shared_libraries/mssql-jdbc-8.3.0.jre8-preview.jar:/config/mssql-jdbc-8.3.0.jre8-preview.jar
-#    - $PWD/../key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12 
+    - $PWD/key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12 
+    - $PWD/plugin-key.kdb:/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.kdb
+    - $PWD/plugin-key.sth:/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.sth
     - $PWD/../shared_libraries/hazelcast-3.12.8.jar:/config/hazelcast.jar
     - $PWD/../hazelcast-config.xml:/config/hazelcast-config.xml
     - $PWD/server.xml:/config/server.xml
@@ -26,7 +41,9 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock
     - $PWD/dropins:/config/dropins
     - $PWD/../shared_libraries/mssql-jdbc-8.3.0.jre8-preview.jar:/config/mssql-jdbc-8.3.0.jre8-preview.jar
- #   - $PWD/../key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12
+    - $PWD/key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12
+    - $PWD/plugin-key.kdb:/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.kdb
+    - $PWD/plugin-key.sth:/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.sth
     - $PWD/../hazelcast-3.12.8.jar:/config/hazelcast.jar
     - $PWD/../hazelcast-config.xml:/config/hazelcast-config.xml
     - $PWD/server.xml:/config/server.xml
