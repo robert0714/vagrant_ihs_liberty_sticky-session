@@ -21,16 +21,11 @@ services:
     image: ibmcom/websphere-liberty:20.0.0.6-full-java8-ibmjava-ubi
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    - $PWD/dropins:/config/dropins
-    - $PWD/../shared_libraries/mssql-jdbc-8.3.0.jre8-preview.jar:/config/mssql-jdbc-8.3.0.jre8-preview.jar
-    - $PWD/key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12 
-    - $PWD/../shared_libraries/hazelcast-3.12.8.jar:/config/hazelcast.jar
-    - $PWD/../hazelcast-config.xml:/config/hazelcast-config.xml
-    - $PWD/server.xml:/config/server.xml
-    - $PWD/server.env:/config/server.env
+    - $PWD/../common_liberty_config:/config
     - $PWD/bootstrap0.properties:/config/bootstrap.properties
+    - $PWD/key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12 
     environment:
-    - KEYSTORE_REQUIRED=false
+    - KEYSTORE_REQUIRED=true
     - EXTRA_OPTS="--lower_case_table_names=1"
     - TZ=Asia/Taipei
     network_mode:  "host"
@@ -39,16 +34,11 @@ services:
     image: ibmcom/websphere-liberty:20.0.0.6-full-java8-ibmjava-ubi
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    - $PWD/dropins:/config/dropins
-    - $PWD/../shared_libraries/mssql-jdbc-8.3.0.jre8-preview.jar:/config/mssql-jdbc-8.3.0.jre8-preview.jar
-    - $PWD/key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12
-    - $PWD/../shared_libraries/hazelcast-3.12.8.jar:/config/hazelcast.jar
-    - $PWD/../hazelcast-config.xml:/config/hazelcast-config.xml
-    - $PWD/server.xml:/config/server.xml
-    - $PWD/server.env:/config/server.env
+    - $PWD/../common_liberty_config:/config
     - $PWD/bootstrap1.properties:/config/bootstrap.properties
+    - $PWD/key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12
     environment:
-    - KEYSTORE_REQUIRED=false
+    - KEYSTORE_REQUIRED=true
     - EXTRA_OPTS="--lower_case_table_names=1"
     - TZ=Asia/Taipei
     network_mode:  "host"

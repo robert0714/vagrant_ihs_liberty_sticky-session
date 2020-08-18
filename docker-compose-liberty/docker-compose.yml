@@ -7,15 +7,10 @@ services:
 #    image: open-liberty:20.0.0.7-full-java8-openj9
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
-    - $PWD/dropins:/config/dropins
-    - $PWD/../shared_libraries/mssql-jdbc-8.3.0.jre8-preview.jar:/config/mssql-jdbc-8.3.0.jre8-preview.jar
-#    - $PWD/../key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12 
-    - $PWD/../shared_libraries/hazelcast-3.12.8.jar:/config/hazelcast.jar
-    - $PWD/../hazelcast-config.xml:/config/hazelcast-config.xml
-    - $PWD/server.xml:/config/server.xml
-    - $PWD/server.env:/config/server.env
-    - $PWD/bootstrap0.properties:/config/bootstrap.properties
-#    - $PWD/classCache:/opt/ol/wlp/output/.classCache
+    - $PWD/../common_liberty_config:/config
+    - $PWD/bootstrap1.properties:/config/bootstrap.properties
+#    - $PWD/../key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12:z
+#    - $PWD/../ltpa.keys:/opt/ibm/wlp/output/defaultServer/resources/security/ltpa.keys:z
     environment:
     - KEYSTORE_REQUIRED=false
     - MYSQL_DATABASE=ec
