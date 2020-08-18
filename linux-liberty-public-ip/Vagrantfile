@@ -1,0 +1,43 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+require "fileutils"
+
+
+VAGRANTFILE_API_VERSION = "2"
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+  if (/cygwin|mswin|mingw|bccwin|wince|emx/ =~ RUBY_PLATFORM) != nil
+    config.vm.synced_folder "../", "/vagrant", mount_options: ["dmode=700,fmode=600"]
+  else
+    config.vm.synced_folder "../", "/vagrant"
+  end
+  (1..2).each do |i|
+    config.vm.define "liberty-n#{i}" do |d|
+      d.vm.box = "bento/centos-7.7"
+      d.vm.hostname = "liberty-n#{i}" 
+#      d.vm.network "private_network", ip: "10.0.30.10#{i}" 
+
+      d.vm.network "public_network", bridge: "eno1", gateway: "192.168.57.1" , ip: "192.168.57.6#{i}"  ,  netmask: "255.255.255.0" , auto_config: "false"
+      # IP address of your LAN's router 
+      default_router = "192.168.57.1"       
+      # change/ensure the default route via the local network's WAN router, useful for public_network/bridged mode
+      d.vm.provision :shell, inline: "ip route delete default 2>&1 >/dev/null || true; ip route add default via #{default_router}"
+
+      d.vm.provider "virtualbox" do |vb|
+	vb.gui = false
+	# Use VBoxManage to customize the VM. For example to change memory:
+	vb.customize ["modifyvm", :id, "--memory", "1748"]
+	vb.customize ["modifyvm", :id, "--cpus",   "2"]
+      end
+    end
+  end
+  if Vagrant.has_plugin?("vagrant-cachier")
+    config.cache.scope = :box
+  end
+  if Vagrant.has_plugin?("vagrant-vbguest")
+    config.vbguest.auto_update = false
+    config.vbguest.no_install = true
+    config.vbguest.no_remote = true
+  end
+end

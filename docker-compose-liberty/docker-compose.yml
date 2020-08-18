@@ -8,7 +8,7 @@ services:
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock
     - $PWD/../common_liberty_config:/config
-    - $PWD/bootstrap1.properties:/config/bootstrap.properties
+#    - $PWD/bootstrap.properties:/config/bootstrap.properties
 #    - $PWD/../key.p12:/opt/ibm/wlp/output/defaultServer/resources/security/key.p12:z
 #    - $PWD/../ltpa.keys:/opt/ibm/wlp/output/defaultServer/resources/security/ltpa.keys:z
     environment:

@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  ihs:
+    container_name: ihs
+    image: ibmcom/ibm-http-server:9.0.5.0
+    volumes:
+    - $PWD/httpd.conf:/opt/IBM/HTTPServer/conf/httpd.conf
+    - $PWD/../ssl/ihsserverkey.kdb:/opt/IBM/HTTPServer/conf/ihsserverkey.kdb
+    - $PWD/../ssl/ihsserverkey.sth:/opt/IBM/HTTPServer/conf/ihsserverkey.sth
+    - $PWD/plugin-cfg.xml:/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-cfg.xml
+    - $PWD/plugin-key.kdb:/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.kdb
+    - $PWD/plugin-key.sth:/opt/IBM/WebSphere/Plugins/config/webserver1/plugin-key.sth
+    environment:
+    - TZ=Asia/Taipei
+#    network_mode:  "host"
+    ports:
+    - "80:80"
+    - "443:443"
