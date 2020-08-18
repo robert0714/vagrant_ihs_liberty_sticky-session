@@ -6,3 +6,5 @@ agent*
 .vagrant/
 plugins
 *.war
+IBM
+wlp
