@@ -36,6 +36,7 @@
     </VirtualHostGroup>
     <!-- URI Groups -->
     <UriGroup Name="default_host_defaultServer_default_node_Cluster_URIs">
+        <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/atm/*"/>
         <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/mgr-web/*"/>
         <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/adminCenter/*"/>
         <Uri AffinityCookie="JSESSIONID" AffinityURLIdentifier="jsessionid" Name="/IBMJMXConnectorREST/*"/>

@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   ihs:
@@ -17,3 +17,19 @@ services:
     ports:
     - "80:80"
     - "443:443"
+  redis:
+    container_name: redis
+    restart: always
+    image: sameersbn/redis:4.0.9-3
+    sysctls:
+      net.core.somaxconn: '4096'
+    command:
+    - --loglevel warning
+    volumes:
+    - $PWD/liberty/redis:/var/lib/redis:Z
+    environment:    
+    - TZ=Asia/Taipei
+    command: > 
+            bash -c "echo 'vm.overcommit_memory = 1' >> /etc/sysctl.conf
+            && redis-server /etc/redis/redis.conf --appendonly yes"
+    network_mode:  "host"
