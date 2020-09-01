@@ -3,12 +3,15 @@
     <!-- Enable features -->
     <featureManager>
         <feature>jsp-2.3</feature>
-        <feature>localConnector-1.0</feature>       
+        <feature>localConnector-1.0</feature>
+        <feature>jdbc-4.2</feature>
         <feature>adminCenter-1.0</feature>
         <feature>jndi-1.0</feature>
-        <feature>jdbc-4.2</feature>
-	    <feature>websocket-1.1</feature>
-		<feature>transportSecurity-1.0</feature>
+        <feature>transportSecurity-1.0</feature>
+        <feature>websocket-1.1</feature>
+        <feature>servlet-4.0</feature>
+        <feature>sessionCache-1.0</feature>
+        <feature>springBoot-2.0</feature>
     </featureManager>
 
 <!-- To access this server from a remote client add a host attribute to the following element, e.g. host="*" -->
