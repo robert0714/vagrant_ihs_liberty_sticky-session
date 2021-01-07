@@ -836,5 +836,5 @@ Listen 0.0.0.0:443
 # GlobalLog logs/was-debug.log "%h %l %u %t \"%r\" %>s %b %D %{WAS_UNIQUE_ID}e %{RH}e %{WAS}e %{JSESSIONID}C %{remote}p"
 # GlobalLog logs/cookie-debug.log "%h %l %u %t \"%r\" %>s %b %{User-Agent}i %D %{RH}e %{WAS}e %{Age}o %{Cache-Control}i exp=%{Expires}o %{Cache-Control}o SC=\"%{Set-Cookie}o\" C=\"%{Cookie}i\" %{Location}o"
 
-LoadModule  was_ap24_module  "C:/Program Files/IBM/WebSphere/Plugins/bin/64bits/mod_was_ap24_http.dll"
+LoadModule  was_ap24_module  "C:/Program Files/IBM/WebSphere/Plugins/bin/64bits/mod_was_ap24_http.so"
 WebSpherePluginConfig   "C:/Program Files/IBM/WebSphere/Plugins/config/webserver1/plugin-cfg.xml"
